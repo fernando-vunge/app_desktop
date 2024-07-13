@@ -1,12 +1,12 @@
-# 🔥 ⚡ Aplicativo Desktop  💥 ☀
+# 🖥 👓 Aplicativo Desktop  🏫 
 
 #### Dessa vez estou a treinar criacao de programas completos com interfaces graficas em java, nesse projecto fiz um softwere de gestao escolar, usando um banco de dados pouco usado, mas eficiente e simples, o SQLite.
 
 
 >***⚠ Atencao:***
 >>**Nao 'e recomendavel o uso do SQLite para armazenameto e manipulacao de grandes vulumes de informacao**
-
->>** O PROJECO ESTA EM PRODUCAO**
+>>
+>>**O PROJECO ESTA EM PRODUCAO**
 >>MAS SE QUISER FAZER TESTE, CONTRIBUIR OU USAR PARA OUTRO FIM, FIQUE AVONTADE E SIGA OS PASSOS ABAIXO
 ---
 

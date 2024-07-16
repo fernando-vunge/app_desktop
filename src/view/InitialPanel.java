@@ -1,128 +1,130 @@
 package view;
 
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.Rectangle;
-import java.awt.SystemColor;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JButton;
 import javax.swing.SwingConstants;
+import java.awt.Font;
 import javax.swing.border.MatteBorder;
+import java.awt.Dimension;
+import javax.swing.JPasswordField;
 
 
-public class InitialPanel extends JPanel {
+
+public class InitialPanel extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
-	public  JPanel loginPanel;
-	public JPanel asidePanel;
-	private JTextField inpt_nome;
-	private JPasswordField inpt_senha;
-
-	/**
-	 * Create the panel.
-	 */
+    private int x = 0;
+    private Timer timer;
+    int xs[];
+    int ys[];
+    private JPasswordField codeForm;
+    
+    public void reRenderForm() {
+    	
+    }
 	
-	public void resizePanel(Rectangle d) {
-		setBounds(0, 0, d.width, d.height);
-		loginPanel.setBounds(0, 0, 353, d.height);
-		asidePanel.setBounds(loginPanel.getWidth() + 1, 0, this.getWidth() - loginPanel.getWidth(), d.height);
-	}
-	
-	public InitialPanel(int width, int height) {
-		setLayout(null);
+	public InitialPanel() {
+		setBackground(new Color(255, 255, 255));
 		setBounds(0, 0, 600, 600);
 		
-		loginPanel = new JPanel();
-		loginPanel.setBackground(Color.WHITE);
-		loginPanel.setBounds(0, 0, 353, this.getHeight());
+		timer = new Timer(25, this); // Configura o timer para chamar actionPerformed a cada 30 milissegundos
+		setLayout(null);
 		
-		asidePanel = new JPanel();
-		asidePanel.setBackground(SystemColor.desktop);
-		asidePanel.setBounds(loginPanel.getWidth() + 1, 0, this.getWidth() - loginPanel.getWidth(), this.getHeight());
+		JPanel panel = new JPanel();
+		panel.setOpaque(false);
+		panel.setBounds(147, 124, 305, 352);
+		add(panel);
 		
+		JLabel formLabel = new JLabel(" Wellcome, type you acess code to get in!");
+		formLabel.setFont(new Font("Yu Gothic UI Semilight", Font.BOLD, 14));
+		formLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
+		codeForm = new JPasswordField();
+		codeForm.setHorizontalAlignment(SwingConstants.CENTER);
+		codeForm.setMinimumSize(new Dimension(170, 30));
+		codeForm.setMaximumSize(new Dimension(170, 30));
+		codeForm.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
+		codeForm.setBackground(Color.LIGHT_GRAY);
+		codeForm.setColumns(10);
 		
-		JLabel lbl_loginTitulo = new JLabel("Bem vindo administrador, insira seu dados para entrar");
-		lbl_loginTitulo.setForeground(Color.DARK_GRAY);
-		lbl_loginTitulo.setFont(new Font("Yu Gothic UI Semilight", Font.PLAIN, 12));
-		lbl_loginTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		JLabel lbl_loginNome = new JLabel("NOME");
-		lbl_loginNome.setFont(new Font("Yu Gothic UI Semilight", Font.BOLD, 10));
-		lbl_loginNome.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		inpt_nome = new JTextField();
-		inpt_nome.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
-		inpt_nome.setToolTipText("Insira seu nome de adminisrtador");
-		inpt_nome.setHorizontalAlignment(SwingConstants.CENTER);
-		inpt_nome.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 14));
-		inpt_nome.setColumns(10);
-		
-		JLabel lbl_loginSenha = new JLabel("SENHA");
-		lbl_loginSenha.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_loginSenha.setFont(new Font("Yu Gothic UI Semilight", Font.BOLD, 10));
-		
-		inpt_senha = new JPasswordField();
-		inpt_senha.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
-		inpt_senha.setHorizontalAlignment(SwingConstants.CENTER);
-		inpt_senha.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 14));
-		inpt_senha.setEchoChar('#');
-		
-		JButton btn_login = new JButton("Login");
-		btn_login.setBorder(null);
-		btn_login.setBackground(SystemColor.desktop);
-		btn_login.setForeground(Color.WHITE);
-		
-		JButton btnNewButton_1 = new JButton("New button");
-		GroupLayout gl_loginPanel = new GroupLayout(loginPanel);
-		gl_loginPanel.setHorizontalGroup(
-			gl_loginPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_loginPanel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lbl_loginTitulo, GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE))
-				.addGroup(gl_loginPanel.createSequentialGroup()
-					.addGap(29)
-					.addComponent(btnNewButton_1)
-					.addContainerGap(226, Short.MAX_VALUE))
-				.addGroup(gl_loginPanel.createSequentialGroup()
-					.addGap(29)
-					.addGroup(gl_loginPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(lbl_loginSenha, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lbl_loginNome, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-						.addComponent(inpt_senha, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE)
-						.addComponent(inpt_nome, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btn_login, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(167, Short.MAX_VALUE))
+		JButton buttonForm = new JButton("Enter");
+		buttonForm.setFont(new Font("Yu Gothic UI Semilight", Font.BOLD, 16));
+		buttonForm.setForeground(Color.WHITE);
+		buttonForm.setBackground(new Color(58, 126, 126));
+		buttonForm.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(109, 188, 188)));
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(102)
+							.addComponent(buttonForm, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(76)
+							.addComponent(codeForm, GroupLayout.PREFERRED_SIZE, 170, GroupLayout.PREFERRED_SIZE))
+						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(formLabel, GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)))
+					.addContainerGap())
 		);
-		gl_loginPanel.setVerticalGroup(
-			gl_loginPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_loginPanel.createSequentialGroup()
-					.addGap(32)
-					.addComponent(lbl_loginTitulo)
-					.addGap(67)
-					.addComponent(lbl_loginNome, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(inpt_nome, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-					.addGap(40)
-					.addComponent(lbl_loginSenha, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(inpt_senha, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-					.addGap(82)
-					.addComponent(btn_login, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-					.addGap(54)
-					.addComponent(btnNewButton_1)
-					.addGap(33))
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(49)
+					.addComponent(formLabel)
+					.addGap(63)
+					.addComponent(codeForm, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+					.addGap(76)
+					.addComponent(buttonForm, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+					.addGap(78))
 		);
-		loginPanel.setLayout(gl_loginPanel);
-		
-		add(loginPanel);
-		add(asidePanel);
-
+		panel.setLayout(gl_panel);
+        timer.start(); // Inicia o timer
+        
+        xs = new int[]{0, getWidth(), getWidth(), 0};
+        ys = new int[]{0, 0, 25,60};
 	}
+	
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D graphic = (Graphics2D) g;
+
+        // Define a cor e desenha um círculo que se move horizontalmente
+        graphic.setColor(new Color(0.23f, 0.49f, 0.49f, 0.5f));
+        ys[2] = 25;
+        ys[3] = 60;
+        graphic.fillPolygon(xs, ys, 4);
+        graphic.setColor(new Color(0.23f, 0.49f, 0.49f, 0.4f));
+        ys[2] = 50;
+        ys[3] = 120;
+        graphic.fillPolygon(xs, ys, 4);
+        graphic.setColor(new Color(0.23f, 0.49f, 0.49f, 0.2f));
+        ys[2] = 75;
+        ys[3] = 180;
+        graphic.fillPolygon(xs, ys, 4);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        xs[1] = getWidth();
+        xs[2] = getWidth();
+    	x += 5; // Move o círculo 5 pixels para a direita
+        if (x > getWidth()) {
+            x = -50; // Reseta a posição quando o círculo sai da tela
+        }
+        repaint(); // Solicita uma repintura do painel
+    }
 }
